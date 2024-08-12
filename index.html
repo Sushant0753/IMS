@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WareView Dashboard</title>
+    
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-100">
+    <nav class="bg-white flex items-center justify-between px-4 sm:px-6 py-3 border-b shadow-sm">
+        <div class="text-xl font-bold">WareView</div>
+        <div class="flex items-center">
+            <input type="text" placeholder="Search" class="w-32 sm:w-64 h-9 border rounded-md px-3 mr-4">
+            <button id="menuToggle" class="lg:hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <div class="flex flex-col lg:flex-row min-h-screen">
+        <!-- Sidebar -->
+
+        <aside id="leftSidebar" class="hidden lg:block w-64 xl:w-72 bg-gray-100 lg:h-screen p-4 lg:overflow-y-auto">
+            <div class="mb-8">
+                <h3 class="text-sm font-semibold text-gray-500 mb-2">GENERAL</h3>
+                <ul>
+                    <li class="mb-2"><a href="#" class="flex items-center text-white bg-custom-bg p-2 rounded"> Dashboard</a></li>
+                    <li class="mb-2"><a href="#" class="flex items-center p-2"> Inventory</a></li>
+                    <li class="mb-2"><a href="#" class="flex items-center p-2"> Sales Orders</a></li>
+                    <li class="mb-2"><a href="#" class="flex items-center p-2"> Suppliers</a></li>
+                    <li class="mb-2"><a href="#" class="flex items-center p-2"> Reports</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-sm font-semibold text-gray-500 mb-2">SUPPORT</h3>
+                <ul>
+                    <li class="mb-2"><a href="#" class="flex items-center p-2"> Help</a></li>
+                    <li class="mb-2"><a href="#" class="flex items-center p-2"> Settings</a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 p-4 sm:p-6 lg:overflow-y-auto">
+            <h1 class="text-2xl font-semibold mb-6">Sales Summary</h1>
+            <div class="grid grid-cols-4 gap-4 mb-8">
+                <div class="bg-white p-4 rounded-lg shadow">
+                    <h3 class="text-sm text-gray-500">Today's Sale</h3>
+                    <p class="text-2xl font-semibold">$143.3k</p>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow">
+                    <h3 class="text-sm text-gray-500">Yearly Total Sales</h3>
+                    <p class="text-2xl font-semibold">$250,623</p>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow">
+                    <h3 class="text-sm text-gray-500">Net Income</h3>
+                    <p class="text-2xl font-semibold">$68.9k</p>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow">
+                    <h3 class="text-sm text-gray-500">Products</h3>
+                    <p class="text-2xl font-semibold">343</p>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow mb-8">
+                <h2 class="text-xl font-semibold mb-4">Stock Report</h2>
+                <canvas id="stockChart" height="200"></canvas>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-xl font-semibold">Sales Order</h2>
+                    <select class="border rounded px-2 py-1">
+                        <option>Last 7 Days</option>
+                    </select>
+                </div>
+                <table class="w-full">
+                    <thead>
+                        <tr class="text-left text-gray-500">
+                            <th class="pb-2">Channel</th>
+                            <th class="pb-2">Draft</th>
+                            <th class="pb-2">Confirmed</th>
+                            <th class="pb-2">Packed</th>
+                            <th class="pb-2">Shipped</th>
+                            <th class="pb-2">Invoiced</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="py-2">Direct Sales</td>
+                            <td>2</td>
+                            <td>32</td>
+                            <td>42</td>
+                            <td>23</td>
+                            <td>7</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2">Wholesale</td>
+                            <td>0</td>
+                            <td>41</td>
+                            <td>33</td>
+                            <td>11</td>
+                            <td>14</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2">Retail</td>
+                            <td>2</td>
+                            <td>12</td>
+                            <td>25</td>
+                            <td>16</td>
+                            <td>21</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+
+        <!-- Right Sidebar -->
+        <aside id="rightSidebar" class="hidden lg:block w-72 xl:w-80 bg-white p-4 sm:p-6 lg:overflow-y-auto">
+            <!-- Right sidebar content -->
+            <div class="flex items-center mb-8">
+                <img src="" alt="Profile" class="w-10 h-10 rounded-full mr-2">
+                <div>
+                    <span class="font-semibold">Username</span>
+                    <p class="text-sm text-gray-500">Admin</p>
+                </div>
+            </div>
+            <h2 class="text-xl font-semibold mb-4">Quick Actions</h2>
+            <ul class="mb-8">
+                <li class="mb-2"><a href="#" class="flex items-center justify-between"><span>Create Order</span><span class="text-gray-500">ctrl + n</span></a></li>
+                <li class="mb-2"><a href="#" class="flex items-center justify-between"><span>Add Product</span><span class="text-gray-500">ctrl + p</span></a></li>
+                <li class="mb-2"><a href="#" class="flex items-center justify-between"><span>Add Supplier</span><span class="text-gray-500">ctrl + k</span></a></li>
+                <li class="mb-2"><a href="#" class="flex items-center justify-between"><span>Export</span><span class="text-gray-500">ctrl + e</span></a></li>
+            </ul>
+            <!-- More right sidebar content -->
+
+            <h2 class="text-xl font-semibold mb-4">Fast Moving Items</h2>
+            <ul>
+                <li class="flex items-center mb-2">
+                    <img src="" alt="Product" class="w-8 h-8 rounded mr-2">
+                    <span>Macbook Pro</span>
+                </li>
+                <li class="flex items-center mb-2">
+                    <img src="" alt="Product" class="w-8 h-8 rounded mr-2">
+                    <span>iPhone 14 pro</span>
+                </li>
+                <li class="flex items-center mb-2">
+                    <img src="" alt="Product" class="w-8 h-8 rounded mr-2">
+                    <span>Zoom75</span>
+                </li>
+                <li class="flex items-center mb-2">
+                    <img src="" alt="Product" class="w-8 h-8 rounded mr-2">
+                    <span>Airpods Pro</span>
+                </li>
+                <li class="flex items-center mb-2">
+                    <img src="" alt="Product" class="w-8 h-8 rounded mr-2">
+                    <span>Samsung Galaxy Fold</span>
+                </li>
+                <li class="flex items-center mb-2">
+                    <img src="" alt="Product" class="w-8 h-8 rounded mr-2">
+                    <span>Samsung Odyssey</span>
+                </li>
+                <li class="flex items-center">
+                    <img src="" alt="Product" class="w-8 h-8 rounded mr-2">
+                    <span>Logitech Superlight</span>
+                </li>
+            </ul>
+        </aside>
+    </div>
+
+    <footer class="bg-white p-6 mt-8">
+        <div class="container mx-auto flex justify-between items-center">
+            <div>
+                <h3 class="font-bold mb-2">WareView</h3>
+                <p class="text-sm text-gray-600">Cultivating Efficiency, Tracking Excellence —<br>Your Trusted Inventory Management Partner</p>
+            </div>
+            <div class="flex space-x-4">
+                <a href="#" class="text-gray-600">Dashboard</a>
+                <a href="#" class="text-gray-600">Sales</a>
+                <a href="#" class="text-gray-600">Banking</a>
+                <a href="#" class="text-gray-600">Records</a>
+                <a href="#" class="text-gray-600">Contact Us</a>
+            </div>
+        </div>
+        <div class="container mx-auto flex justify-between items-center mt-4 pt-4 border-t">
+            <p class="text-sm text-gray-600">© 2023 Mugna Technologies, Inc.</p>
+            <div class="flex space-x-4">
+                <a href="#" class="text-gray-600">Privacy Policy</a>
+                <a href="#" class="text-gray-600">Terms & Conditions</a>
+            </div>
+            <div class="flex space-x-4">
+                <a href="#" class="text-blue-500"><i class="fab fa-facebook"></i></a>
+                <a href="#" class="text-pink-500"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="text-blue-400"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Chart.js code for the Stock Report
+        const ctx = document.getElementById('stockChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                datasets: [
+                    {
+                        label: 'Stock In',
+                        data: [10000, 8000, 6000, 11000, 5000, 5000, 7000, 13000, 8000, 5000, 9000, 6000],
+                        backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                    },
+                    {
+                        label: 'Stock Out',
+                        data: [5000, 4000, 9000, 7000, 4000, 6000, 8000, 6000, 4000, 7000, 4000, 5000],
+                        backgroundColor: 'rgba(153, 102, 255, 0.6)',
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: { stacked: true },
+                    y: { stacked: true, beginAtZero: true }
+                }
+            }
+        });
+
+
+        const menuToggle = document.getElementById('menuToggle');
+        const rightSidebar = document.getElementById('rightSidebar');
+
+        menuToggle.addEventListener('click', () => {
+            rightSidebar.classList.toggle('hidden');
+            rightSidebar.classList.toggle('lg:block');
+            rightSidebar.classList.toggle('fixed');
+            rightSidebar.classList.toggle('inset-y-0');
+            rightSidebar.classList.toggle('right-0');
+            rightSidebar.classList.toggle('z-50');
+            rightSidebar.classList.toggle('w-64');
+            rightSidebar.classList.toggle('sm:w-72');
+        });
+
+        // Close sidebar when clicking outside of it
+        document.addEventListener('click', (event) => {
+            const isClickInside = rightSidebar.contains(event.target) || menuToggle.contains(event.target);
+            if (!isClickInside && !rightSidebar.classList.contains('hidden') && window.innerWidth < 1024) {
+                rightSidebar.classList.add('hidden');
+                rightSidebar.classList.remove('fixed', 'inset-y-0', 'right-0', 'z-50', 'w-64', 'sm:w-72');
+            }
+        });
+
+
+        // Adjust sidebar visibility on window resize
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 1024) {
+                rightSidebar.classList.remove('hidden', 'fixed', 'inset-y-0', 'right-0', 'z-50', 'w-64', 'sm:w-72');
+                rightSidebar.classList.add('lg:block');
+            } else {
+                rightSidebar.classList.add('hidden');
+                rightSidebar.classList.remove('lg:block', 'fixed', 'inset-y-0', 'right-0', 'z-50', 'w-64', 'sm:w-72');
+            }
+        });
+    </script>
+</body>
+</html>
