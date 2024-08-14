@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WareView Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-100">
+
+    <nav class="bg-white flex items-center justify-between px-4 sm:px-6 py-3 border-b shadow-sm">
+        <div class="flex items-center">
+            <button id="sidebarToggle" class="mr-2 lg:hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+            <div class="text-xl font-bold">WareView</div>
+        </div>
+        <div class="flex items-center">
+            <input type="text" id="searchBar" placeholder="Search" class="w-32 sm:w-64 h-9 border rounded-md px-3 mr-4 hidden lg:block">
+            <button id="searchToggle" class="lg:hidden mr-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+            </button>
+            <!-- Login, Signup, and Logout Buttons -->
+            <button id="loginButton" class="text-sm text-blue-500 hover:underline" onclick="location.href='index.html'">Login</button>
+            <button id="signupButton" class="text-sm text-blue-500 hover:underline ml-4" onclick="location.href='signup.html'">Signup</button>
+            <button id="logoutButton" class="text-sm text-red-500 hover:underline ml-4" style="display:none;" onclick="logout()">Logout</button>
+        </div>
+    </nav>
+
+    <div class="flex flex-col lg:flex-row min-h-screen">
+        <!-- Sidebar -->
+        <aside id="leftSidebar" class="hidden fixed lg:relative lg:block w-64 xl:w-72 bg-gray-100 h-screen p-4 overflow-y-auto transition-transform duration-300 ease-in-out lg:translate-x-0 -translate-x-full">
+            <div class="mb-8">
+                <h3 class="text-sm font-semibold text-gray-500 mb-2">GENERAL</h3>
+                <ul>
+                    <li class="mb-2"><a href="dashboard.html" class="flex items-center p-2"><i class="fas fa-tachometer-alt mr-2"></i> Dashboard</a></li>
+                    <li class="mb-2"><a href="#" class="flex items-center p-2  "><i class="fas fa-box mr-2"></i> Inventory</a></li>
+                    <li class="mb-2"><a href="#" class="flex items-center p-2"><i class="fas fa-shopping-cart mr-2"></i> Sales Orders</a></li>
+                    <li class="mb-2"><a href="#" class="flex items-center p-2"><i class="fas fa-truck mr-2"></i> Suppliers</a></li>
+                    <li class="mb-2"><a href="report.html" class="flex items-center bg-blue-100 text-blue-500 p-2 rounded"><i class="fas fa-chart-bar mr-2"></i> Reports</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-sm font-semibold text-gray-500 mb-2">SUPPORT</h3>
+                <ul>
+                    <li class="mb-2"><a href="#" class="flex items-center p-2"><i class="fas fa-question-circle mr-2"></i> Help</a></li>
+                    <li class="mb-2"><a href="#" class="flex items-center p-2"><i class="fas fa-cog mr-2"></i> Settings</a></li>
+                </ul>
+            </div>
+        </aside>
+        
+
+        <!-- Main content -->
+        <main class="flex-1 p-8">
+            <!-- Weekly Sales Chart -->
+            <div class="bg-white p-4 rounded shadow mb-8">
+                <h3 class="text-xl font-bold mb-4">Weekly Sales</h3>
+                <canvas id="weeklySalesChart"></canvas>
+            </div>
+
+            <!-- Supplier Performance Chart -->
+            <div class="bg-white p-4 rounded shadow mb-8">
+                <h3 class="text-xl font-bold mb-4">Supplier Performance Report (Top 5 Suppliers)</h3>
+                <canvas id="supplierPerformanceChart"></canvas>
+            </div>
+
+            
+        </main>
+        <aside id="rightSidebar" class="hidden lg:block w-72 xl:w-80 bg-white p-4 sm:p-6 lg:overflow-y-auto">
+            <!-- Right sidebar content -->
+            <div class="flex items-center mb-8">
+                <img src="pookie.jpg" alt="Profile" class="w-10 h-10 rounded-full mr-2">
+                <div>
+                    <span class="font-semibold">Pookie</span>
+                    <p class="text-sm text-gray-500">Admin</p>
+                </div>
+                
+            </div>
+            <!-- Top Suppliers Pie Chart -->
+            <div class="bg-white p-4 rounded shadow">
+                <h3 class="text-xl font-bold mb-4">Top Suppliers</h3>
+                <canvas id="topSuppliersChart"></canvas>
+            </div>
+        </aside>
+    </div>
+
+    <script src="report.js"></script>
+</body>
+</html>
